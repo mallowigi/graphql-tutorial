@@ -1,7 +1,7 @@
 import React from 'react';
 import '@apollo/space-kit/reset.css';
 import { colors as SKColors } from '@apollo/space-kit/colors';
-import { Global } from '@emotion/core';
+import { Global } from '@emotion/react';
 
 const breakpoints = [480, 768, 992, 1200];
 export const mq = breakpoints.map((bp) => `@media (min-width: ${bp}px)`);
@@ -32,7 +32,7 @@ const GlobalStyles = () => (
         margin: 0,
         height: '100%',
         padding: 0,
-        fontFamily: "'Source Sans Pro', sans-serif",
+        fontFamily: '\'Source Sans Pro\', sans-serif',
         backgroundColor: colors.background,
         color: colors.text,
       },
