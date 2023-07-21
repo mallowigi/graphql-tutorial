@@ -1,29 +1,24 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import {
-  colors,
-  Button,
-  IconRun,
-  IconView,
-  IconTime,
-  IconBook,
-} from '../styles';
+import { Button, colors, IconBook, IconRun, IconTime, IconView } from '../styles';
 import { humanReadableTimeFromSeconds } from '../utils/helpers';
 import { Link } from 'react-router-dom';
 import ContentSection from './content-section';
 import MarkDown from './md-content';
+import { Module, Track } from '../gql/graphql';
 
 /**
  * Track Detail component renders the main content of a given track:
  * author, length, number of views, modules list, among other things.
  * It provides access to the first module of the track.
  */
-const TrackDetail: React.FC<{track: any}> = ({track}) => {
+const TrackDetail: React.FC<{ track: Track }> = ({ track }) => {
   const {
     title,
+    id,
     description,
     thumbnail,
-    author = { photo: '', name: ''},
+    author = { photo: '', name: '' },
     length,
     modulesCount,
     modules = [],
@@ -32,50 +27,58 @@ const TrackDetail: React.FC<{track: any}> = ({track}) => {
 
   return (
     <ContentSection>
-      <CoverImage src={thumbnail ?? ''} alt="" />
+      <CoverImage src={thumbnail ?? ''} alt=""/>
+
       <TrackDetails>
         <DetailRow>
           <h1>{title}</h1>
         </DetailRow>
+
         <DetailRow>
           <DetailItem>
             <h4>Track details</h4>
+
             <IconAndLabel>
-              <IconView width="16px" />
+              <IconView width="16px"/>
               <div id="viewCount">{numberOfViews} view(s)</div>
             </IconAndLabel>
+
             <IconAndLabel>
-              <IconBook width="14px" height="14px" />
+              <IconBook width="14px" height="14px"/>
               <div>{modulesCount} modules</div>
             </IconAndLabel>
+
             <IconAndLabel>
-              <IconTime width="14px" />
+              <IconTime width="14px"/>
               <div>{humanReadableTimeFromSeconds(length ?? 0)}</div>
             </IconAndLabel>
           </DetailItem>
+
           <DetailItem>
             <h4>Author</h4>
-            <AuthorImage src={author.photo ?? ''} />
+            <AuthorImage src={author.photo ?? ''}/>
             <AuthorName>{author.name}</AuthorName>
           </DetailItem>
+
           <div>
             {/* Need to comment this out until Link is placed within a Router */}
-            {/* <StyledLink to={`./module/${modules[0]['id']}`}> */}
+            <StyledLink to={`./module/${modules[0]['id']}`}>
               <Button
-                icon={<IconRun width="20px" />}
+                icon={<IconRun width="20px"/>}
                 color={colors.pink.base}
                 size="large"
               >
                 Start Track
               </Button>
-            {/* </StyledLink> */}
+            </StyledLink>
           </div>
         </DetailRow>
+
         <ModuleListContainer>
           <DetailItem>
             <h4>Modules</h4>
             <ul>
-              {modules.map((module: any) => (
+              {modules.map((module: Module) => (
                 <li key={module.title}>
                   <div>{module.title}</div>
                   <ModuleLength>
@@ -87,7 +90,8 @@ const TrackDetail: React.FC<{track: any}> = ({track}) => {
           </DetailItem>
         </ModuleListContainer>
       </TrackDetails>
-      <MarkDown content={description} />
+
+      <MarkDown content={description}/>
     </ContentSection>
   );
 };

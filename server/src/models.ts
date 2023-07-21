@@ -5,6 +5,9 @@ export type TrackModel = {
   thumbnail?: string;
   length?: number;
   modulesCount?: number;
+  numberOfViews?: number;
+  description?: string;
+  modules?: ModuleModel[];
 };
 
 export type AuthorModel = {
@@ -17,4 +20,6 @@ export type ModuleModel = {
   id: string;
   title: string;
   length?: number;
+  videoUrl?: string;
+  content?: string;
 }

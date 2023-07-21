@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react';
+import React, { PropsWithChildren } from 'react';
 import { colors, widths } from '../styles';
 import styled from '@emotion/styled';
 import { Link } from 'react-router-dom';
@@ -16,8 +16,9 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
           <HomeLink to="/">
             <HomeButton>
               <LogoContainer>
-                <Logo src={logo} />
+                <Logo src={logo}/>
               </LogoContainer>
+
               <Title>
                 <h3>Catstronaut</h3>
                 <div>Kitty space academy</div>
@@ -25,6 +26,7 @@ const Header: React.FC<PropsWithChildren> = ({ children }) => {
             </HomeButton>
           </HomeLink>
         </HomeButtonContainer>
+
         {children}
       </Container>
     </HeaderBar>
