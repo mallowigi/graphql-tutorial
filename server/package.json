@@ -8,6 +8,11 @@
     "dev": "ts-node-dev --respawn ./src/index.ts",
     "start": "npm run compile && nodemon ./dist/index.js"
   },
+  "dependencies": {
+    "@apollo/server": "^4.8.0",
+    "graphql": "^16.7.1",
+    "graphql-tag": "^2.12.6"
+  },
   "devDependencies": {
     "dotenv": "^8.6.0",
     "nodemon": "^2.0.20",
