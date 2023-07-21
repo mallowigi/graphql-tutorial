@@ -27,6 +27,14 @@ export type Author = {
   photo?: Maybe<Scalars['String']['output']>;
 };
 
+export type IncrementTrackViewsResponse = {
+  __typename?: 'IncrementTrackViewsResponse';
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  track?: Maybe<Track>;
+};
+
 export type Module = {
   __typename?: 'Module';
   content?: Maybe<Scalars['String']['output']>;
@@ -34,6 +42,16 @@ export type Module = {
   length?: Maybe<Scalars['Int']['output']>;
   title: Scalars['String']['output'];
   videoUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  incrementTrackViews: IncrementTrackViewsResponse;
+};
+
+
+export type MutationIncrementTrackViewsArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Query = {
@@ -67,6 +85,21 @@ export type Track = {
   title: Scalars['String']['output'];
 };
 
+export type IncrementTrackViewsMutationMutationVariables = Exact<{
+  incrementTrackViewsId: Scalars['ID']['input'];
+}>;
+
+
+export type IncrementTrackViewsMutationMutation = { __typename?: 'Mutation', incrementTrackViews: { __typename?: 'IncrementTrackViewsResponse', code: number, success: boolean, message: string, track?: { __typename?: 'Track', id: string, numberOfViews?: number | null } | null } };
+
+export type GetModuleAndParentTrackQueryVariables = Exact<{
+  moduleId: Scalars['ID']['input'];
+  trackId: Scalars['ID']['input'];
+}>;
+
+
+export type GetModuleAndParentTrackQuery = { __typename?: 'Query', module: { __typename?: 'Module', id: string, title: string, content?: string | null, videoUrl?: string | null }, track: { __typename?: 'Track', id: string, title: string, modules: Array<{ __typename?: 'Module', id: string, title: string, length?: number | null }> } };
+
 export type GetTrackQueryVariables = Exact<{
   trackId: Scalars['ID']['input'];
 }>;
@@ -80,6 +113,8 @@ export type GetTracksQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetTracksQuery = { __typename?: 'Query', tracksForHome: Array<{ __typename?: 'Track', id: string, title: string, thumbnail?: string | null, length?: number | null, modulesCount?: number | null, author: { __typename?: 'Author', id: string, name: string, photo?: string | null } }> };
 
 
+export const IncrementTrackViewsMutationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"IncrementTrackViewsMutation"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"incrementTrackViewsId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"incrementTrackViews"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"incrementTrackViewsId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"code"}},{"kind":"Field","name":{"kind":"Name","value":"success"}},{"kind":"Field","name":{"kind":"Name","value":"message"}},{"kind":"Field","name":{"kind":"Name","value":"track"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"numberOfViews"}}]}}]}}]}}]} as unknown as DocumentNode<IncrementTrackViewsMutationMutation, IncrementTrackViewsMutationMutationVariables>;
+export const GetModuleAndParentTrackDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getModuleAndParentTrack"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"moduleId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"trackId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"module"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"moduleId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"content"}},{"kind":"Field","name":{"kind":"Name","value":"videoUrl"}}]}},{"kind":"Field","name":{"kind":"Name","value":"track"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"trackId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"modules"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"length"}}]}}]}}]}}]} as unknown as DocumentNode<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>;
 export const GetTrackDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"getTrack"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"trackId"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"ID"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"track"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"trackId"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"}}]}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"}},{"kind":"Field","name":{"kind":"Name","value":"length"}},{"kind":"Field","name":{"kind":"Name","value":"modulesCount"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"numberOfViews"}},{"kind":"Field","name":{"kind":"Name","value":"modules"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"length"}}]}}]}}]}}]} as unknown as DocumentNode<GetTrackQuery, GetTrackQueryVariables>;
 export const GetTracksDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"GetTracks"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"tracksForHome"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"thumbnail"}},{"kind":"Field","name":{"kind":"Name","value":"length"}},{"kind":"Field","name":{"kind":"Name","value":"modulesCount"}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"photo"}}]}}]}}]}}]} as unknown as DocumentNode<GetTracksQuery, GetTracksQueryVariables>;
 /** All built-in and custom scalars, mapped to their actual values */
@@ -99,6 +134,14 @@ export type Author = {
   photo?: Maybe<Scalars['String']['output']>;
 };
 
+export type IncrementTrackViewsResponse = {
+  __typename?: 'IncrementTrackViewsResponse';
+  code: Scalars['Int']['output'];
+  message: Scalars['String']['output'];
+  success: Scalars['Boolean']['output'];
+  track?: Maybe<Track>;
+};
+
 export type Module = {
   __typename?: 'Module';
   content?: Maybe<Scalars['String']['output']>;
@@ -106,6 +149,16 @@ export type Module = {
   length?: Maybe<Scalars['Int']['output']>;
   title: Scalars['String']['output'];
   videoUrl?: Maybe<Scalars['String']['output']>;
+};
+
+export type Mutation = {
+  __typename?: 'Mutation';
+  incrementTrackViews: IncrementTrackViewsResponse;
+};
+
+
+export type MutationIncrementTrackViewsArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Query = {
@@ -139,6 +192,21 @@ export type Track = {
   title: Scalars['String']['output'];
 };
 
+export type IncrementTrackViewsMutationMutationVariables = Exact<{
+  incrementTrackViewsId: Scalars['ID']['input'];
+}>;
+
+
+export type IncrementTrackViewsMutationMutation = { __typename?: 'Mutation', incrementTrackViews: { __typename?: 'IncrementTrackViewsResponse', code: number, success: boolean, message: string, track?: { __typename?: 'Track', id: string, numberOfViews?: number | null } | null } };
+
+export type GetModuleAndParentTrackQueryVariables = Exact<{
+  moduleId: Scalars['ID']['input'];
+  trackId: Scalars['ID']['input'];
+}>;
+
+
+export type GetModuleAndParentTrackQuery = { __typename?: 'Query', module: { __typename?: 'Module', id: string, title: string, content?: string | null, videoUrl?: string | null }, track: { __typename?: 'Track', id: string, title: string, modules: Array<{ __typename?: 'Module', id: string, title: string, length?: number | null }> } };
+
 export type GetTrackQueryVariables = Exact<{
   trackId: Scalars['ID']['input'];
 }>;
@@ -152,6 +220,93 @@ export type GetTracksQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetTracksQuery = { __typename?: 'Query', tracksForHome: Array<{ __typename?: 'Track', id: string, title: string, thumbnail?: string | null, length?: number | null, modulesCount?: number | null, author: { __typename?: 'Author', id: string, name: string, photo?: string | null } }> };
 
 
+export const IncrementTrackViewsMutationDocument = gql`
+    mutation IncrementTrackViewsMutation($incrementTrackViewsId: ID!) {
+  incrementTrackViews(id: $incrementTrackViewsId) {
+    code
+    success
+    message
+    track {
+      id
+      numberOfViews
+    }
+  }
+}
+    `;
+export type IncrementTrackViewsMutationMutationFn = Apollo.MutationFunction<IncrementTrackViewsMutationMutation, IncrementTrackViewsMutationMutationVariables>;
+
+/**
+ * __useIncrementTrackViewsMutationMutation__
+ *
+ * To run a mutation, you first call `useIncrementTrackViewsMutationMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useIncrementTrackViewsMutationMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [incrementTrackViewsMutationMutation, { data, loading, error }] = useIncrementTrackViewsMutationMutation({
+ *   variables: {
+ *      incrementTrackViewsId: // value for 'incrementTrackViewsId'
+ *   },
+ * });
+ */
+export function useIncrementTrackViewsMutationMutation(baseOptions?: Apollo.MutationHookOptions<IncrementTrackViewsMutationMutation, IncrementTrackViewsMutationMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<IncrementTrackViewsMutationMutation, IncrementTrackViewsMutationMutationVariables>(IncrementTrackViewsMutationDocument, options);
+      }
+export type IncrementTrackViewsMutationMutationHookResult = ReturnType<typeof useIncrementTrackViewsMutationMutation>;
+export type IncrementTrackViewsMutationMutationResult = Apollo.MutationResult<IncrementTrackViewsMutationMutation>;
+export type IncrementTrackViewsMutationMutationOptions = Apollo.BaseMutationOptions<IncrementTrackViewsMutationMutation, IncrementTrackViewsMutationMutationVariables>;
+export const GetModuleAndParentTrackDocument = gql`
+    query getModuleAndParentTrack($moduleId: ID!, $trackId: ID!) {
+  module(id: $moduleId) {
+    id
+    title
+    content
+    videoUrl
+  }
+  track(id: $trackId) {
+    id
+    title
+    modules {
+      id
+      title
+      length
+    }
+  }
+}
+    `;
+
+/**
+ * __useGetModuleAndParentTrackQuery__
+ *
+ * To run a query within a React component, call `useGetModuleAndParentTrackQuery` and pass it any options that fit your needs.
+ * When your component renders, `useGetModuleAndParentTrackQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useGetModuleAndParentTrackQuery({
+ *   variables: {
+ *      moduleId: // value for 'moduleId'
+ *      trackId: // value for 'trackId'
+ *   },
+ * });
+ */
+export function useGetModuleAndParentTrackQuery(baseOptions: Apollo.QueryHookOptions<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>(GetModuleAndParentTrackDocument, options);
+      }
+export function useGetModuleAndParentTrackLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>(GetModuleAndParentTrackDocument, options);
+        }
+export type GetModuleAndParentTrackQueryHookResult = ReturnType<typeof useGetModuleAndParentTrackQuery>;
+export type GetModuleAndParentTrackLazyQueryHookResult = ReturnType<typeof useGetModuleAndParentTrackLazyQuery>;
+export type GetModuleAndParentTrackQueryResult = Apollo.QueryResult<GetModuleAndParentTrackQuery, GetModuleAndParentTrackQueryVariables>;
 export const GetTrackDocument = gql`
     query getTrack($trackId: ID!) {
   track(id: $trackId) {
