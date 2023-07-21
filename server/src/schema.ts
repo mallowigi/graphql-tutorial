@@ -34,4 +34,15 @@ export const typeDefs = gql`
     track(id: ID!): Track!
     module(id: ID!): Module!
   }
+
+  type Mutation {
+    incrementTrackViews(id: ID!): IncrementTrackViewsResponse!
+  }
+
+  type IncrementTrackViewsResponse {
+    code: Int!
+    success: Boolean!
+    message: String!
+    track: Track
+  }
 `;
