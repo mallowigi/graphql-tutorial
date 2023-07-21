@@ -27,18 +27,34 @@ export type Author = {
   photo?: Maybe<Scalars['String']['output']>;
 };
 
+export type Module = {
+  __typename?: 'Module';
+  id: Scalars['ID']['output'];
+  length?: Maybe<Scalars['Int']['output']>;
+  title: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  track?: Maybe<Track>;
   tracksForHome: Array<Track>;
+};
+
+
+export type QueryTrackArgs = {
+  id: Scalars['ID']['input'];
 };
 
 /** A track is a group of Modules that teaches about a specific topic */
 export type Track = {
   __typename?: 'Track';
   author: Author;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   length?: Maybe<Scalars['Int']['output']>;
+  modules: Array<Module>;
   modulesCount?: Maybe<Scalars['Int']['output']>;
+  numberOfViews?: Maybe<Scalars['Int']['output']>;
   thumbnail?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
 };
@@ -67,18 +83,34 @@ export type Author = {
   photo?: Maybe<Scalars['String']['output']>;
 };
 
+export type Module = {
+  __typename?: 'Module';
+  id: Scalars['ID']['output'];
+  length?: Maybe<Scalars['Int']['output']>;
+  title: Scalars['String']['output'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  track?: Maybe<Track>;
   tracksForHome: Array<Track>;
+};
+
+
+export type QueryTrackArgs = {
+  id: Scalars['ID']['input'];
 };
 
 /** A track is a group of Modules that teaches about a specific topic */
 export type Track = {
   __typename?: 'Track';
   author: Author;
+  description?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
   length?: Maybe<Scalars['Int']['output']>;
+  modules: Array<Module>;
   modulesCount?: Maybe<Scalars['Int']['output']>;
+  numberOfViews?: Maybe<Scalars['Int']['output']>;
   thumbnail?: Maybe<Scalars['String']['output']>;
   title: Scalars['String']['output'];
 };

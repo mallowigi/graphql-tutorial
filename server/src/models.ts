@@ -11,5 +11,10 @@ export type AuthorModel = {
   id: string;
   name: string;
   photo?: string;
-  
+}
+
+export type ModuleModel = {
+  id: string;
+  title: string;
+  length?: number;
 }
