@@ -11,7 +11,9 @@
   "dependencies": {
     "@apollo/server": "^4.8.0",
     "graphql": "^16.7.1",
-    "graphql-tag": "^2.12.6"
+    "graphql-tag": "^2.12.6",
+    "@graphql-tools/schema": "^10.0.0",
+    "@graphql-tools/mock": "^9.0.0"
   },
   "devDependencies": {
     "dotenv": "^8.6.0",
