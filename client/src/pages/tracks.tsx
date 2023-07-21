@@ -5,22 +5,22 @@ import { Track } from '../gql/graphql';
 import TrackCard from '../containers/track-card';
 
 /** TRACKS query to retrieve all tracks */
-const TRACKS = gql(`
-    query GetTracks {
-      tracksForHome {
+const TRACKS = gql`
+  query GetTracks {
+    tracksForHome {
+      id
+      title
+      thumbnail
+      length
+      modulesCount
+      author {
         id
-        title
-        thumbnail
-        length
-        modulesCount
-        author {
-          id
-          name
-          photo
-        }
+        name
+        photo
       }
     }
-  `);
+  }
+`;
 /**
  * Tracks Page is the Catstronauts home page.
  * We display a grid of tracks fetched with useQuery with the TRACKS query
